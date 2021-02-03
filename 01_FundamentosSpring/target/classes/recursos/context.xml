@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  En este fichero vamos a crear todos los objetos que quereamos 
+	  que sean gestionados por el contexto de Spring, es decir aplicar
+	   la inversion de control p tambien llamada IoC 
+	   
+	   Un objeto spring se crea con la etiqueta "bean" y al menos hay que
+	   darle 2 atributos, el id, que debe de ser unico y la clase de la cual
+	   hay que crear el objeto
+	   
+	   EL ciclo de vida de estos objetos va a ser gestionado por spring y por 
+	   defecto el ciclo de vida sera "singleton" que es que el objeto
+	   existira siempre en la aplicación, es decir sera único
+	   
+	   Ahora yo como programador no tengo porque preocuparme de estar  refernciado
+	   siempre este objeto
+	   
+	   Ademas el objeto deja de ser anonimo, y su identificador
+	   es el id-->
+	  
+	   
+	   <bean id = "persona1" class = "entidad.Persona"></bean>
+	  <!--  Dentro del contexto podemos crear todos los objetos que queramos
+	  y podamos alterar sus propiedades (atributos) en este fichero xml
+	  Esto podremos hacerlo siempre y cuando tenga estructura JavaBean-->
+	     
+	     <bean id = "persona2" class = "entidad.Persona">
+	     	<property name = "nombre" value ="Ernion Güesly"></property>
+	     	<property name = "edad" value ="20"></property>
+	    	 <property name = "peso" value ="55.4"></property>
+	     </bean>
+	     
+	     
+	     <bean id="direccion1" class="entidad.Direccion">
+	     	<property name="tipoVia" value="calle"></property>
+	     	<property name="nombreVia" value="Gran Vía"></property>
+	     	<property name="ciudad" value="Madrid"></property>
+	     </bean>
+	     
+	     <bean id = "persona3" class = "entidad.Persona">
+	     	<property name = "nombre" value ="Gandalf el Gris"></property>
+	     	<property name = "edad" value ="42"></property>
+	    	 <property name = "peso" value ="80"></property>
+	    	 <property name="direccion" ref="direccion1"></property>
+	     </bean>
+	     
+	     <!-- Es posible que necesitemos crear objetos en tiempo de ejecución, no que los objetos vengan creados. Para ello podemos usar el 
+	     alcance o "scop" "protoype", este alcance a diferencia de Singleton, cada vez que llamemos al identificador de este objeto, nos va a crear uno
+	     nuevo, a imagen y semejanza -->
+	     
+	     <bean id="personaPrototipada" class = "entidad.Persona" scope="prototype">
+	     <property name = "nombre" value ="Ironman"></property>
+	     	<property name = "edad" value ="40"></property>
+	    	 <property name = "peso" value ="250"></property>
+	     </bean>
+	     <bean id="listaPersonas" class = "java.util.LinkedList" scope="singleton"></bean>
+	     <!-- A parte de inyectar objetos mediante la propiedad y el atributo ref podemos
+	     hacerlo mediante el "innerbean", es  decir dar de alta los dos objetos a la vez
+	     por ejemplo: -->
+	     
+	     <bean id="persona4" class="entidad.Persona">
+	     	<property name="nombre" value="Homer"></property>
+	    	<property name = "edad" value ="37"></property>
+	        <property name = "peso" value ="120"></property>
+	        <property name="direccion">
+	        	<bean class="entidad.Direccion">
+	        		<property name="tipoVia" value="street"></property>
+	        		<property name="nombreVia" value="evergreen terras 742"></property>
+	     			<property name="ciudad" value="Springfield"></property>
+	     		</bean> 
+	     	</property>
+	     </bean>
+	    
+	    <!-- Podemos crear un array predefinido con objetos -->
+	    <bean id="listaPersonas2" class="java.util.ArrayList">
+	    	<constructor-arg>
+	    		<list>
+	    			<ref bean="persona4"/>
+	    			<ref bean="persona3"/>
+	    		</list>
+	    	</constructor-arg></bean>
+</beans>

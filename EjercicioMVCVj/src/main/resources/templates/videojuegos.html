@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Videojuegos</title>
+</head>
+<body>
+
+	<h3>Esta es su lista de videojuegos</h3>
+	<h4 style="color: purple" th:each="valor : ${listaVj}">
+	   <span th:text="${valor.nombre}"></span>
+	    <span th:text="${valor.compania}"></span>
+	    <span th:text="${valor.precio}"></span>
+	    <span th:text="${valor.puntuacion}"></span>
+	</h4>
+	
+	<form action="consultaIdVJ" method="get">
+        <input type="text" name="id" placeholder="Introduce un id">
+        <input type="submit" value="Consultar">
+    </form>
+	
+</body>
+</html>

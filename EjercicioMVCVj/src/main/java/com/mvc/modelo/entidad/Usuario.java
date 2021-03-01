@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Usuario {
 	
 	@Id //con esto indicamos que id es la clave primaria
-	@GeneratedValue //autoincremente el id
+	@GeneratedValue (strategy = GenerationType.IDENTITY) //autoincremente el id
 	private int id;
 	private String nombre;
 	private String password;

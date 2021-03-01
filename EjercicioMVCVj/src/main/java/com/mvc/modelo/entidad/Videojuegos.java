@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Videojuegos {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private String nombre;
@@ -45,6 +45,12 @@ public class Videojuegos {
 	public void setPuntuacion(int puntuacion) {
 		this.puntuacion = puntuacion;
 	}
+	@Override
+	public String toString() {
+		return "Videojuegos [id=" + id + ", nombre=" + nombre + ", compania=" + compania + ", precio=" + precio
+				+ ", puntuacion=" + puntuacion + "]";
+	}
+
 	
 	
 
